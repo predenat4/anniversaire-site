@@ -134,6 +134,7 @@ main {
     max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Fix scrolling on iOS */
     color: white;
 }
 
