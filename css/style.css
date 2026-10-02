@@ -110,8 +110,14 @@ body::before {
 
 @media (max-width: 600px) {
     .content {
-        padding: 20px;
-        border-radius: 20px;
+        padding: 15px; /* Réduit encore */
+        border-radius: 15px; /* Réduit encore */
+        font-size: 0.9em; /* Texte un peu plus petit */
+    }
+    .content h1, .content h2 {
+        font-size: 1.5em; /* Titres plus petits */
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
 
@@ -154,20 +160,16 @@ body::before {
 
 /* Contrôle du son */
 .sound-control {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     background: var(--glass-bg);
     backdrop-filter: blur(5px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px; /* Réduit un peu */
+    height: 40px; /* Réduit un peu */
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    z-index: 100;
     transition: transform 0.2s ease;
 }
 .sound-control:active { transform: scale(0.9); }
