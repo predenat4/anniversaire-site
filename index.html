@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Horloge en haut de page -->
+    <div id="live-clock" class="content" style="position: absolute; top: 10px; left: 10px; z-index: 100; padding: 15px; font-size: 14px; width: auto; max-width: 250px;"></div>
+
+    <!-- Image de fond floue -->
+    <div id="bg-photo"></div>
+
+    <!-- Coeurs flottants en arrière-plan -->
+    <div id="background-hearts"></div>
+
+    <!-- Icône de contrôle du son -->
+    <button id="sound-toggle" class="sound-control" title="Activer/Couper le son">
+        <svg id="volume-icon" viewBox="0 0 24 24" width="24" height="24" fill="white">
+            <path id="vol-path" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+    </button>
+
+    <!-- ACTE 0 : Pré-accroche -->
+    <section id="act0" class="act active">
+        <div class="content">
+            <p>Veuillez mettre vos écouteurs pour une expérience optimale.</p>
+            <button class="btn" onclick="goToAct(1)">C'est bon !</button>
+        </div>
+    </section>
+
+    <!-- ACTE 1 : L'accroche -->
+    <section id="act1" class="act hidden">
+        <div class="content">
+            <h1 id="typewriter-text"></h1>
+            <p id="typewriter-text-2"></p>
+            <button id="btn-act1" class="btn hidden" onclick="startExperience()">Oui, je suis prête</button>
+        </div>
+    </section>
+
+    <!-- ACTE 2 : Le vœu d'anniversaire -->
+    <section id="act2" class="act hidden">
+        <div class="content">
+            <h2>Joyeux anniversaire !</h2>
+            <p>Je sais, c'est le genre de mot qu'on écrit à beaucoup de monde, presque par habitude. Mais là, en l'écrivant pour toi, ça ne ressemble à rien de ce que j'ai pu dire avant. ✨</p>
+            <p>Aujourd'hui c'est ton jour, celui où le monde a eu la bonne idée de te faire naître. Et honnêtement, plus le temps passe, plus je me dis que c'est l'une des meilleures choses qui pouvait arriver — pas juste pour toi, mais pour tous ceux qui ont la chance d'avoir ta présence dans leur vie. Et moi le premier. 🤍</p>
+            <p>J'espère de tout cœur que cette nouvelle année t'apportera tout ce que tu mérites de plus beau : des matins plus légers, des rires spontanés qui font du bien au cœur, des projets qui aboutissent et des personnes autour de toi qui te voient vraiment pour ce que tu vaux. Tu donnes beaucoup aux autres, souvent naturellement et sans même chercher à en faire trop, et j'aimerais vraiment que cette année soit celle où la vie te le rend au centuple. 🌟</p>
+            <p>Je ne sais pas toujours trouver la formule parfaite sans que ça sonne trop travaillé ou trop mis en scène. Alors je vais juste rester simple, parce que c'est souvent là que réside le plus vrai : je suis profondément reconnaissant que tu existes. Tellement content que nos chemins se soient croisés. Tu as cette manière d'être qui laisse une vraie empreinte, et c'est précieux.</p>
+            <p>Et je ne pense pas qu’un jour tu pourras sortir de mes pensées, car tu as tellement marqué ma vie que c’est devenu complètement impossible. Même si je ne le répète pas aussi souvent qu'avant, je garde toujours ce même amour qui m’a déjà fait perdre la tête pour toi. Je t’aime énormément, et comme j’ai des rêves un peu plus cinglés les uns que les autres, l’un de ceux que je nourris le plus, c’est de passer ma vie avec toi — et je compte faire le nécessaire pour que ce vœu se réalise. 💫</p>
+            <p>Il est vrai que tu es loin de moi, mais cette distance ne suffit pas à faire faner l’amour que j’ai pour toi. Encore une fois, je te le redis : « je t’aime ». Un mot très simple, mais tellement sincère. Comme je l’ai mentionné, te rencontrer est l’une des plus belles choses qui pouvait m’arriver. En vrai, je suis tellement fier/pudique d'habitude qu’il m’est presque impossible de livrer mes vrais sentiments, mais pour toi, j’irai jusqu’à dire que je te considère comme ma déesse... je ne pourrai jamais m'arrêter de t’aimer. 🌹</p>
+            <p>Profite à fond de ta journée, entoure-toi de ce qui te fait du bien, et j'espère sincèrement être encore là pour ta prochaine bougie, et pour toutes celles qui suivront. 🕯️</p>
+            <p><strong>Joyeux anniversaire à toi, PETIT-HOMME Numa Nirdjemska. 🎂</strong></p>
+            <p><strong>Je t’aime. ❤️</strong></p>
+            <p><strong>signé&nbsp;: L’être qui t’aime le plus au monde<br>PREDENAT Jean Phenix</strong></p>
+        </div>
+    </section>
+
+    <!-- Audio element -->
+    <audio id="bg-music" loop>
+        <source src="assets/audio/musique-fond.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
