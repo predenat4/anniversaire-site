@@ -18,25 +18,32 @@ function goToAct(actNumber) {
 }
 
 function initializeAudioAndGoToAct1() {
-    // Tente de lancer la musique dès le premier clic
+    // 1. Tentative immédiate (nécessaire pour iOS Safari)
     bgMusic.play()
         .then(() => {
             isPlaying = true;
             volPath.setAttribute('d', pathOn);
         })
         .catch(e => {
-            console.error("Lecture automatique bloquée :", e);
-            // Ajout d'une tentative de déblocage par interaction forcée si le play échoue
-            document.addEventListener('click', function playOnInteraction() {
+            console.error("Lecture automatique bloquée, ajout d'un écouteur global:", e);
+            
+            // 2. Si échec, écouteur global sur le prochain 'touchstart' ou 'click'
+            const playOnInteraction = () => {
                 bgMusic.play().then(() => {
                     isPlaying = true;
                     volPath.setAttribute('d', pathOn);
+                    // Nettoyage des écouteurs
                     document.removeEventListener('click', playOnInteraction);
-                }).catch(() => {});
-            }, { once: true });
+                    document.removeEventListener('touchstart', playOnInteraction);
+                }).catch(err => console.error("Échec de la lecture différée", err));
+            };
+            
+            document.addEventListener('click', playOnInteraction);
+            document.addEventListener('touchstart', playOnInteraction);
         });
     goToAct(1);
 }
+
 
 // Lancement de l'expérience
 function startExperience() {
@@ -75,6 +82,9 @@ async function typeWriter(elementId, text, speed) {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', async () => {
+    // S'assurer que l'audio est chargé
+    bgMusic.load();
+
     // Création des coeurs flottants
     const heartsContainer = document.getElementById('background-hearts');
     for (let i = 0; i < 25; i++) {
