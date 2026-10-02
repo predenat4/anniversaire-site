@@ -18,12 +18,23 @@ function goToAct(actNumber) {
 }
 
 function initializeAudioAndGoToAct1() {
-    // Tente de charger/débloquer l'audio
-    bgMusic.load();
-    bgMusic.play().then(() => {
-        bgMusic.pause();
-        bgMusic.currentTime = 0;
-    }).catch(e => console.log("Audio unlock failed, will try again later"));
+    // Tente de lancer la musique dès le premier clic
+    bgMusic.play()
+        .then(() => {
+            isPlaying = true;
+            volPath.setAttribute('d', pathOn);
+        })
+        .catch(e => {
+            console.error("Lecture automatique bloquée :", e);
+            // Ajout d'une tentative de déblocage par interaction forcée si le play échoue
+            document.addEventListener('click', function playOnInteraction() {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    volPath.setAttribute('d', pathOn);
+                    document.removeEventListener('click', playOnInteraction);
+                }).catch(() => {});
+            }, { once: true });
+        });
     goToAct(1);
 }
 
