@@ -108,6 +108,13 @@ body::before {
     color: white;
 }
 
+@media (max-width: 600px) {
+    .content {
+        padding: 20px;
+        border-radius: 20px;
+    }
+}
+
 /* Scrollbar Liquid Glass */
 .content::-webkit-scrollbar {
     width: 6px;

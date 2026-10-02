@@ -17,6 +17,16 @@ function goToAct(actNumber) {
     }
 }
 
+function initializeAudioAndGoToAct1() {
+    // Tente de charger/débloquer l'audio
+    bgMusic.load();
+    bgMusic.play().then(() => {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+    }).catch(e => console.log("Audio unlock failed, will try again later"));
+    goToAct(1);
+}
+
 // Lancement de l'expérience
 function startExperience() {
     bgMusic.play().then(() => {
