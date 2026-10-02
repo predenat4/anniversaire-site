@@ -8,7 +8,6 @@
     --font-body: 'Lora', serif;
 }
 
-
 * { box-sizing: border-box; }
 
 body {
@@ -17,31 +16,50 @@ body {
     font-family: var(--font-body);
     font-weight: bold;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     text-align: center;
+}
+
+/* Header (Clock + Sound) */
+#header-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+#live-clock {
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
 }
 
 /* Image de fond floue */
 #bg-photo {
     position: fixed;
-    top: -10px; /* Débordement pour cacher les bords flous */
-    left: -10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('../assets/images/WhatsApp Image 2026-10-02 at 2.05.27 AM.jpeg');
     background-size: cover;
     background-position: center;
     filter: blur(15px);
-    -webkit-filter: blur(15px);
     z-index: -3;
-    transform: scale(1.1); /* Pour éviter les bords blancs du flou */
+    transform: scale(1.1);
 }
 
-/* Voile sombre pour la lisibilité */
+/* Voile sombre */
 body::before {
     content: "";
     position: fixed;
@@ -92,6 +110,15 @@ body::before {
     100% { transform: translateY(-100vh) rotate(45deg) scale(1); opacity: 0; }
 }
 
+/* Main Content Wrapper */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 50px);
+    padding: 20px 0;
+}
+
 /* Glass Card */
 .content {
     background: var(--glass-bg);
@@ -99,7 +126,7 @@ body::before {
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     border-radius: 30px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
     width: 90%;
     max-width: 500px;
@@ -108,44 +135,10 @@ body::before {
     color: white;
 }
 
-@media (max-width: 600px) {
-    .content {
-        padding: 15px; /* Réduit encore */
-        border-radius: 15px; /* Réduit encore */
-        font-size: 0.9em; /* Texte un peu plus petit */
-    }
-    .content h1, .content h2 {
-        font-size: 1.5em; /* Titres plus petits */
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-}
-
-/* Scrollbar Liquid Glass */
-.content::-webkit-scrollbar {
-    width: 6px;
-}
-.content::-webkit-scrollbar-track {
-    background: transparent;
-}
-.content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-}
-.content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-/* Firefox */
-.content {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-}
-
-
 /* Boutons */
 .btn {
-    margin-top: 25px;
-    padding: 12px 25px;
+    margin-top: 20px;
+    padding: 10px 20px;
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border: 2px solid white;
@@ -172,49 +165,6 @@ body::before {
     cursor: pointer;
     transition: transform 0.2s ease;
 }
-.sound-control:active { transform: scale(0.9); }
-#header-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-}
-
-#live-clock {
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 5px 10px;
-    border-radius: 10px;
-    color: white;
-}
-
-@media (max-width: 600px) {
-    .content {
-        padding: 15px;
-        border-radius: 20px;
-        width: 95%;
-        max-height: 70vh;
-    }
-    .content h1, .content h2 {
-        font-size: 1.3em;
-        margin: 5px 0;
-    }
-    .content p {
-        font-size: 0.9em;
-        margin: 8px 0;
-    }
-    .btn {
-        padding: 10px 20px;
-        margin-top: 15px;
-    }
-}
 
 /* Gestion des actes */
 .act { 
@@ -222,7 +172,7 @@ body::before {
     width: 100%;
     justify-content: center;
     opacity: 0;
-    display: none; /* Par défaut caché */
+    display: none;
 }
 .act.active { 
     display: flex !important; 
@@ -233,40 +183,15 @@ body::before {
     opacity: 0; 
 }
 
-/* Credits Animation (Acte 5) */
-.credits-container {
-    height: 300px;
-    overflow: hidden;
-    position: relative;
+/* Responsive fixes */
+@media (max-width: 600px) {
+    .content {
+        padding: 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+    }
+    .content h1, .content h2 {
+        font-size: 1.3em;
+        margin: 10px 0;
+    }
 }
-.credits {
-    animation: scrollCredits 15s linear infinite;
-    position: absolute;
-    width: 100%;
-}
-@keyframes scrollCredits {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
-}
-
-/* Confetti */
-.confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #ff9a9e;
-    animation: fall 3s linear infinite;
-}
-@keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
-}
-
-/* System Reminder Style */
-.system-reminder {
-    font-family: 'Courier New', Courier, monospace;
-    text-align: left;
-    background: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid white !important;
-}
-.system-reminder p { margin: 10px 0; }
