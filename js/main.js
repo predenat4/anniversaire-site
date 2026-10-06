@@ -18,18 +18,20 @@ function goToAct(actNumber) {
 }
 
 function initializeAudioAndGoToAct1() {
-    // 1. Déclenchement explicite sur clic utilisateur
+    // 1. Lancer l'audio
     bgMusic.play()
         .then(() => {
             isPlaying = true;
             volPath.setAttribute('d', pathOn);
+            // 2. Attendre un court instant avant de changer de page
+            setTimeout(() => {
+                goToAct(1);
+            }, 100);
         })
         .catch(e => {
-            // Affiche l'erreur sur l'écran du téléphone pour diagnostic
-            alert("Erreur audio (iPhone) : " + e.message);
+            alert("Erreur audio : " + e.message + ". Vérifiez le bouton silencieux physique de l'iPhone.");
             console.error("Lecture impossible:", e);
         });
-    goToAct(1);
 }
 
 
