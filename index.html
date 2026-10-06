@@ -1,73 +1,847 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joyeux Anniversaire</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F8F0DF">
+<title>Les pages que nous écrivons</title>
+
+<style>
+:root {
+    --cream: #F8F0DF;
+    --cream-light: #FFF9EE;
+    --gold: #D8B98A;
+    --gold-light: #E8D2AE;
+    --brown: #765536;
+    --brown-dark: #8B4A54; /* Rose foncé */
+    --white: #FFFDF8;
+    --shadow: rgba(74, 53, 37, 0.14);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: rgba(248, 240, 223, 0.6);
+    backdrop-filter: blur(5px);
+    font-size: 0.9rem;
+    color: var(--brown-dark);
+    z-index: 100;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--brown-dark);
+    background:
+        radial-gradient(circle at 20% 10%, rgba(216,185,138,.22), transparent 28%),
+        radial-gradient(circle at 85% 75%, rgba(232,210,174,.28), transparent 30%),
+        var(--cream);
+    overflow-x: hidden;
+}
+
+.background-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url("./background.jpeg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    transform: scale(1.1);
+    will-change: transform;
+}
+
+button {
+    font: inherit;
+}
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 20px;
+}
+
+.opening-card {
+    width: min(680px, 100%);
+    text-align: center;
+    padding: 48px 28px;
+    background: rgba(255,253,248,.78);
+    border: 1px solid rgba(216,185,138,.5);
+    border-radius: 30px;
+    box-shadow: 0 25px 70px var(--shadow);
+    backdrop-filter: blur(8px);
+    animation: cardIn 1.2s ease both;
+}
+
+.date {
+    font-size: .95rem;
+    letter-spacing: 2px;
+    color: var(--brown);
+    margin-bottom: 20px;
+}
+
+.opening-card h1 {
+    margin: 0 0 14px;
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
+    font-weight: 500;
+    animation: titleReveal 1.4s ease both;
+}
+
+.opening-card p {
+    font-size: 1.08rem;
+    line-height: 1.8;
+    margin: 10px auto 24px;
+    max-width: 540px;
+}
+
+.soft-note {
+    font-size: .95rem !important;
+    opacity: .82;
+}
+
+.main-button {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-radius: 999px;
+    padding: 15px 30px;
+    margin-top: 12px;
+    color: var(--white);
+    background: var(--brown);
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(74,53,37,.18);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.main-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.38),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left .65s ease;
+}
+
+.main-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 17px 35px rgba(74,53,37,.25);
+}
+
+.main-button:hover::after {
+    left: 150%;
+}
+
+.main-button:active {
+    transform: scale(.97);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   HISTOIRE
+========================= */
+
+.story {
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+/* =========================
+   COUVERTURE
+========================= */
+
+.cover {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    background: transparent;
+    isolation: isolate;
+}
+
+.cover::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    background: transparent;
+    filter: blur(4px);
+    transform: scale(1.05);
+    z-index: -2;
+}
+
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,249,238,.12),
+            rgba(248,240,223,.58)
+        );
+    z-index: -1;
+}
+
+.cover-content {
+    width: min(800px, 92%);
+    padding: 42px 25px;
+    border-radius: 32px;
+    background: rgba(255,253,248,.67);
+    border: 1px solid rgba(255,255,255,.55);
+    box-shadow: 0 25px 80px rgba(74,53,37,.18);
+    backdrop-filter: blur(7px);
+    animation: coverReveal 1.5s ease both;
+}
+
+.cover-kicker {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: .78rem;
+    margin-bottom: 18px;
+    animation: fadeUp 1s .2s both;
+}
+
+.cover h1 {
+    margin: 0;
+    font-size: clamp(2.7rem, 10vw, 6.5rem);
+    line-height: 1;
+    font-weight: 500;
+    text-shadow: 0 5px 25px rgba(74,53,37,.13);
+    animation: fadeUp 1.2s .35s both;
+}
+
+.cover-subtitle {
+    max-width: 650px;
+    margin: 25px auto 0;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    line-height: 1.8;
+    animation: fadeUp 1.2s .55s both;
+}
+
+.scroll-hint {
+    display: inline-block;
+    margin-top: 35px;
+    font-size: .9rem;
+    opacity: .75;
+    animation: float 2.4s ease-in-out infinite;
+}
+
+/* =========================
+   TEXTE
+========================= */
+
+.story-container {
+    width: min(850px, 92%);
+    margin: 40px auto;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brown);
+}
+
+.section-intro {
+    text-align: center;
+    padding: 85px 10px 35px;
+}
+
+.section-intro h2 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.3rem);
+    font-weight: 500;
+}
+
+.section-intro p {
+    margin: 18px auto 0;
+    max-width: 600px;
+    line-height: 1.8;
+    opacity: .8;
+}
+
+.story-text {
+    padding: 20px 0;
+}
+
+.story-text p {
+    margin: 0 auto 30px;
+    max-width: 760px;
+    font-size: clamp(1.05rem, 2.6vw, 1.18rem);
+    line-height: 2;
+}
+
+.story-title {
+    text-align: center;
+    font-size: clamp(2rem, 7vw, 3.6rem);
+    font-weight: 500;
+    margin: 20px 0 45px;
+}
+
+.promise-list {
+    margin: 30px auto 42px;
+    max-width: 720px;
+    padding: 25px 30px;
+    border-left: 3px solid var(--gold);
+    background: rgba(255,253,248,.48);
+    border-radius: 0 20px 20px 0;
+}
+
+.promise-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.promise-list li {
+    padding: 9px 0;
+    font-style: italic;
+    line-height: 1.7;
+}
+
+.promise-list li::before {
+    content: "♡ ";
+    color: var(--brown);
+}
+
+.highlight {
+    margin: 70px auto;
+    padding: 38px 28px;
+    text-align: center;
+    border-top: 1px solid var(--gold-light);
+    border-bottom: 1px solid var(--gold-light);
+}
+
+.highlight h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: 500;
+}
+
+.highlight p {
+    margin: 16px auto 0;
+    line-height: 1.8;
+}
+
+.ending {
+    text-align: center;
+    margin: 85px auto 0;
+    padding: 55px 25px;
+    border-radius: 30px;
+    background: rgba(255,253,248,.65);
+    box-shadow: 0 20px 60px var(--shadow);
+}
+
+.ending h2 {
+    font-size: clamp(2rem, 7vw, 3.4rem);
+    font-weight: 500;
+    margin: 0 0 25px;
+}
+
+.ending p {
+    line-height: 1.9;
+    font-size: 1.08rem;
+    margin: 13px auto;
+    max-width: 650px;
+}
+
+.mountian-wish,
+.mountain-wish {
+    margin-top: 35px !important;
+    font-style: italic;
+}
+
+footer {
+    text-align: center;
+    padding: 55px 20px 25px;
+    font-size: .9rem;
+    opacity: .72;
+}
+
+/* =========================
+   PETITS CŒURS
+========================= */
+
+.heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    animation: heartFloat 7s linear forwards;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+.reveal {
+    opacity: 1;
+    transform: none;
+}
+
+.reveal.ready {
+    animation: revealUp .9s ease both;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        letter-spacing: 8px;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: .5px;
+    }
+}
+
+@keyframes coverReveal {
+    from {
+        opacity: 0;
+        transform: scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes heartFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(.7) rotate(0deg);
+    }
+
+    12% {
+        opacity: .65;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translateY(-100vh)
+            scale(1.25)
+            rotate(18deg);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .opening-card {
+        padding: 38px 20px;
+        border-radius: 24px;
+    }
+
+    .cover {
+        min-height: 88vh;
+    }
+
+    .cover-content {
+        padding: 35px 18px;
+        border-radius: 24px;
+    }
+
+    .story-container {
+        width: min(90%, 850px);
+    }
+
+    .promise-list {
+        padding: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <div id="header-container">
-        <div id="live-clock"></div>
-        
-        <!-- Icône de contrôle du son -->
-        <button id="sound-toggle" class="sound-control" title="Activer/Couper le son">
-            <svg id="volume-icon" viewBox="0 0 24 24" width="24" height="24" fill="white">
-                <path id="vol-path" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-            </svg>
+<div class="background-blur"></div>
+
+<header class="header">
+    <div id="dateTime"></div>
+</header>
+
+<!-- =========================
+     ÉCRAN 1: BIENVENUE
+========================= -->
+<section id="welcomeScreen" class="screen">
+    <div class="opening-card">
+        <h1>Bonjour Numa ❤️</h1>
+        <p>Veuillez mettre vos écouteurs pour une expérience optimale. 🎧</p>
+        <button class="main-button" onclick="showScreen('readyScreen')">
+            C’est bon !
         </button>
     </div>
+</section>
 
-    <!-- Image de fond floue -->
-    <div id="bg-photo"></div>
+<!-- =========================
+     ÉCRAN 2: PRÉPARATION
+========================= -->
+<section id="readyScreen" class="screen hidden">
+    <div class="opening-card">
+        <h1>Tu es prête ?</h1>
+        <button class="main-button" onclick="enterStory()">
+            Oui, je suis prête
+        </button>
+    </div>
+</section>
 
-    <!-- Coeurs flottants en arrière-plan -->
-    <div id="background-hearts"></div>
+<!-- =========================
+     ÉCRAN 3: LETTRE
+========================= -->
+<main id="storyPage" class="story hidden">
+    <div class="story-container" style="padding-top: 100px;">
+        <article class="story-text">
+            <p>Joyeux anniversaire, Numa.</p>
+            <p>J'ai commencé ce message au moins trois fois. À chaque fois, je trouvais que ça ne sonnait pas assez comme moi, ou pas assez à la hauteur de ce que je ressens. Alors j'ai arrêté de chercher les beaux mots, et je vais simplement te parler comme je le fais quand je pense à toi. Ça arrive souvent, en fait. Tout le temps.</p>
+            <p>Aujourd'hui, c'est ton jour. Je voudrais que tu le vives sans te poser de questions, sans te soucier des autres, juste en te laissant gâter. Tu donnes tellement aux gens autour de toi, souvent sans que personne s'en rende compte, sans que tu en parles ni que tu attendes quoi que ce soit en retour. Moi, je le vois. Je l'ai toujours vu. Et si je pouvais faire une seule chose aujourd'hui, ce serait de t'offrir un jour où c'est toi dont on prend soin, pour une fois.</p>
+            <p>Je ne suis pas quelqu'un qui dit facilement ce qu'il ressent. Je suis trop fier, ou trop pudique, je ne sais même pas lequel des deux. J'ai souvent préféré me taire plutôt que de dire les choses maladroitement. Peut-être que je te le dis moins souvent qu'avant, mais ne te trompe surtout pas là-dessus : ce que je ressens pour toi n'a pas bougé. Je crois même que c'est plus fort qu'au début. Avec le temps, ce n'est pas l'excitation des premiers jours qui est restée, c'est quelque chose de plus calme et de plus solide, qui ne s'use pas.</p>
+            <p>Je me souviens encore de la première impression que tu m'as faite en te voyant pour la première fois : une fille assez singulière, qui ne pouvait pas passer inaperçue à cause de sa beauté d'ange. Ces moments resteront toujours dans mon esprit.</p>
+            <p>Tu as marqué ma vie d'une façon que je n'arrive pas à expliquer correctement. Je pense à toi le matin, je pense à toi le soir, et même au milieu d'une journée où je suis sûr d'avoir la tête ailleurs, il y a toujours un coin de mon esprit qui est avec toi. J'ai arrêté d'essayer de te sortir de mes pensées. Honnêtement, je n'en ai plus du tout envie.</p>
+            <p>Je me souviens encore des fois où je chantais pour toi, des fois où on se disputait pour rien, des moments de joie, des moments où je me sentais malade à cause de tes absences non annoncées, sans oublier les moments qui ont marqué ton départ.</p>
+            <p>Je sais que tu es loin. Je ne vais pas faire semblant que cette distance ne pèse pas : il y a des soirs où elle pèse lourd, où j'aimerais simplement pouvoir te voir, être dans la même pièce que toi, sans rien dire de spécial. Mais elle n'a jamais réussi à faire faner ce que j'ai pour toi. Elle me rappelle seulement à quel point j'ai envie qu'on soit au même endroit, un jour, pour de bon.</p>
+            <p>Parce que oui, j'ai des rêves un peu fous, plus cinglés les uns que les autres, et tu le sais. Mais le plus important de tous, celui que je porte le plus profondément, c'est de faire ma vie avec toi. Je ne te le dis pas à la légère, et je ne te le dis pas pour te faire plaisir un jour d'anniversaire. Je le pense vraiment. Je vais tout faire pour que ça arrive. Je travaille, je construis, je me bats pour ça, et je ne compte pas lâcher.</p>
+            <p>J'aimerais que tu saches une chose, parce que je ne te l'ai peut-être pas assez dite : je suis fier de toi. Fier de la personne que tu es, de la façon dont tu avances, même quand ce n'est pas facile. Si tu doutes de toi un jour, souviens-toi qu'il y a quelqu'un, quelque part, qui croit en toi sans la moindre hésitation.</p>
+            <p>Cette année, je te souhaite des choses simples et vraies. Des matins plus légers. Des rires qui arrivent sans prévenir. Des projets qui aboutissent. Des gens autour de toi qui te voient vraiment pour ce que tu vaux, et qui ne te le font jamais oublier. Et surtout, je te souhaite de te sentir aimée, pas seulement le jour de ton anniversaire, mais tous les jours de l'année.</p>
+            <p>Je t'aime, Numa. Simplement, sincèrement. C'est un mot tout simple, mais je n'en ai pas de plus vrai. Pour moi, tu es ce qu'il y a de plus précieux, je te considère presque comme ma déesse, et je ne pourrai jamais m'arrêter de t'aimer.</p>
+            <p>Profite de ta journée. Entoure-toi de ce qui te fait du bien. Et j'espère de tout mon cœur être encore là pour ta prochaine bougie, et pour toutes celles qui suivront.</p>
+            <p>Joyeux anniversaire, mon amour.</p>
+            <p>Celui qui t'aime le plus au monde,<br>Jean Phenix PREDENAT</p>
+        </article>
+    </div>
+</main>
 
-    <main>
-        <!-- ACTE 0 : Pré-accroche -->
-        <section id="act0" class="act active">
-            <div class="content">
-                <p>Veuillez mettre vos écouteurs pour une expérience optimale.</p>
-                <button class="btn" onclick="initializeAudioAndGoToAct1()">C'est bon !</button>
-            </div>
-        </section>
 
-        <!-- ACTE 1 : L'accroche -->
-        <section id="act1" class="act hidden">
-            <div class="content">
-                <h1 id="typewriter-text"></h1>
-                <p id="typewriter-text-2"></p>
-                <button id="btn-act1" class="btn hidden" onclick="startExperience()">Oui, je suis prête</button>
-            </div>
-        </section>
+<!-- =========================
+     MUSIQUE
+========================= -->
 
-        <!-- ACTE 2 : Le vœu d'anniversaire -->
-        <section id="act2" class="act hidden">
-            <div class="content">
-                <h2>Joyeux anniversaire !</h2>
-                <p>Je sais, c'est le genre de mot qu'on écrit à beaucoup de monde, presque par habitude. Mais là, en l'écrivant pour toi, ça ne ressemble à rien de ce que j'ai pu dire avant. ✨</p>
-                <p>Aujourd'hui c'est ton jour, celui où le monde a eu la bonne idée de te faire naître. Et honnêtement, plus le temps passe, plus je me dis que c'est l'une des meilleures choses qui pouvait arriver — pas juste pour toi, mais pour tous ceux qui ont la chance d'avoir ta présence dans leur vie. Et moi le premier. 🤍</p>
-                <p>J'espère de tout cœur que cette nouvelle année t'apportera tout ce que tu mérites de plus beau : des matins plus légers, des rires spontanés qui font du bien au cœur, des projets qui aboutissent et des personnes autour de toi qui te voient vraiment pour ce que tu vaux. Tu donnes beaucoup aux autres, souvent naturellement et sans même chercher à en faire trop, et j'aimerais vraiment que cette année soit celle où la vie te le rend au centuple. 🌟</p>
-                <p>Je ne sais pas toujours trouver la formule parfaite sans que ça sonne trop travaillé ou trop mis en scène. Alors je vais juste rester simple, parce que c'est souvent là que réside le plus vrai : je suis profondément reconnaissant que tu existes. Tellement content que nos chemins se soient croisés. Tu as cette manière d'être qui laisse une vraie empreinte, et c'est précieux.</p>
-                <p>Et je ne pense pas qu’un jour tu pourras sortir de mes pensées, car tu as tellement marqué ma vie que c’est devenu complètement impossible. Même si je ne le répète pas aussi souvent qu'avant, je garde toujours ce même amour qui m’a déjà fait perdre la tête pour toi. Je t’aime énormément, et comme j’ai des rêves un peu plus cinglés les uns que les autres, l’un de ceux que je nourris le plus, c’est de passer ma vie avec toi — et je compte faire le nécessaire pour que ce vœu se réalise. 💫</p>
-                <p>Il est vrai que tu es loin de moi, mais cette distance ne suffit pas à faire faner l’amour que j’ai pour toi. Encore une fois, je te le redis : « je t’aime ». Un mot très simple, mais tellement sincère. Comme je l’ai mentionné, te rencontrer est l’une des plus belles choses qui pouvait m’arriver. En vrai, je suis tellement fier/pudique d'habitude qu’il m’est presque impossible de livrer mes vrais sentiments, mais pour toi, j’irai jusqu’à dire que je te considère comme ma déesse... je ne pourrai jamais m'arrêter de t’aimer. 🌹</p>
-                <p>Profite à fond de ta journée, entoure-toi de ce qui te fait du bien, et j'espère sincèrement être encore là pour ta prochaine bougie, et pour toutes celles qui suivront. 🕯️</p>
-                <p><strong>Joyeux anniversaire à toi, PETIT-HOMME Numa Nirdjemska. 🎂</strong></p>
-                <p><strong>Je t’aime. ❤️</strong></p>
-                <p><strong>signé&nbsp;: L’être qui t’aime le plus au monde<br>PREDENAT Jean Phenix</strong></p>
-            </div>
-        </section>
-    </main>
+<audio id="music" loop preload="auto">
+    <source
+        src="./Taylor Swift - Daylight (Lyric Video)(M4A_128K).m4a.mp4"
+        type="audio/mp4"
+    >
+</audio>
 
-    <!-- Audio element -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="assets/audio/musique-fond.mp3" type="audio/mpeg">
-    </audio>
 
-    <script src="js/main.js"></script>
+<script>
+
+/* =========================
+   DATE ET HEURE
+========================= */
+
+function updateDateTime() {
+    const dateTime = document.getElementById("dateTime");
+    if (!dateTime) return;
+    const now = new Date();
+    const dateOptions = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+    const timeOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit" };
+    dateTime.textContent = now.toLocaleDateString("fr-FR", dateOptions) + " · " + now.toLocaleTimeString("fr-FR", timeOptions);
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.getElementById(screenId).classList.remove('hidden');
+}
+
+async function enterStory() {
+    const music = document.getElementById("music");
+    const ready = document.getElementById("readyScreen");
+    const storyPage = document.getElementById("storyPage");
+
+    try {
+        music.currentTime = 0;
+        await music.play();
+    } catch (error) {
+        console.error("Music playback failed", error);
+    }
+
+    ready.classList.add("hidden");
+    storyPage.classList.remove("hidden");
+    
+    // Smooth scroll to top of story
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+
+/* =========================
+   ANIMATION AU DÉFILEMENT
+========================= */
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("ready");
+
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.08,
+            rootMargin: "0px 0px -40px 0px"
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        ".story-text .reveal, .highlight.reveal, .ending.reveal"
+    )
+    .forEach((element) => {
+
+        observer.observe(element);
+
+    });
+
+  /* =========================
+   PETITS CŒURS FLOTTANTS
+   ========================= */
+
+const heartStyle = document.createElement("style");
+
+heartStyle.textContent = `
+.heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    bottom: -40px;
+    opacity: 0;
+    animation: heartFloat var(--duration) ease-in forwards;
+    filter: drop-shadow(0 2px 5px rgba(120, 70, 60, 0.12));
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translate(0, 0) scale(0.55) rotate(0deg);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: var(--opacity);
+    }
+
+    35% {
+        transform: translate(var(--move1), -35vh)
+                   scale(1)
+                   rotate(8deg);
+    }
+
+    65% {
+        transform: translate(var(--move2), -70vh)
+                   scale(0.9)
+                   rotate(-8deg);
+        opacity: var(--opacity);
+    }
+
+    100% {
+        transform: translate(var(--move3), -115vh)
+                   scale(0.7)
+                   rotate(12deg);
+        opacity: 0;
+    }
+}
+`;
+
+document.head.appendChild(heartStyle);
+
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const symbols = ["♥", "♡", "❤", "💕"];
+
+    heart.textContent =
+        symbols[Math.floor(Math.random() * symbols.length)];
+
+
+    /* Position horizontale */
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+
+    /* Taille */
+    heart.style.fontSize =
+        (11 + Math.random() * 18) + "px";
+
+
+    /* Vitesse */
+    heart.style.setProperty(
+        "--duration",
+        (7 + Math.random() * 6) + "s"
+    );
+
+
+    /* Transparence */
+    heart.style.setProperty(
+        "--opacity",
+        (0.25 + Math.random() * 0.45).toFixed(2)
+    );
+
+
+    /* Mouvement naturel */
+    heart.style.setProperty(
+        "--move1",
+        (-25 + Math.random() * 50) + "px"
+    );
+
+    heart.style.setProperty(
+        "--move2",
+        (-45 + Math.random() * 90) + "px"
+    );
+
+    heart.style.setProperty(
+        "--move3",
+        (-70 + Math.random() * 140) + "px"
+    );
+
+
+    document.body.appendChild(heart);
+
+
+    /* Suppression automatique */
+    setTimeout(() => {
+        heart.remove();
+    }, 14000);
+}
+
+
+/* Apparition irrégulière */
+function startHearts() {
+
+    createHeart();
+
+    const delay =
+        500 + Math.random() * 900;
+
+    setTimeout(startHearts, delay);
+}
+
+startHearts();
+</script>
+
 </body>
 </html>
+    
