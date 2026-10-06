@@ -18,28 +18,14 @@ function goToAct(actNumber) {
 }
 
 function initializeAudioAndGoToAct1() {
-    // 1. Tentative immédiate (nécessaire pour iOS Safari)
+    // 1. Déclenchement explicite sur clic utilisateur uniquement
     bgMusic.play()
         .then(() => {
             isPlaying = true;
             volPath.setAttribute('d', pathOn);
         })
         .catch(e => {
-            console.error("Lecture automatique bloquée, ajout d'un écouteur global:", e);
-            
-            // 2. Si échec, écouteur global sur le prochain 'touchstart' ou 'click'
-            const playOnInteraction = () => {
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    volPath.setAttribute('d', pathOn);
-                    // Nettoyage des écouteurs
-                    document.removeEventListener('click', playOnInteraction);
-                    document.removeEventListener('touchstart', playOnInteraction);
-                }).catch(err => console.error("Échec de la lecture différée", err));
-            };
-            
-            document.addEventListener('click', playOnInteraction);
-            document.addEventListener('touchstart', playOnInteraction);
+            console.error("Lecture impossible, même après interaction:", e);
         });
     goToAct(1);
 }
