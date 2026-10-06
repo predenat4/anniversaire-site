@@ -18,15 +18,16 @@ function goToAct(actNumber) {
 }
 
 function initializeAudioAndGoToAct1() {
-    // 1. Chargement et lecture immédiate lors de l'interaction
-    bgMusic.load(); 
+    // 1. Déclenchement explicite sur clic utilisateur
     bgMusic.play()
         .then(() => {
             isPlaying = true;
             volPath.setAttribute('d', pathOn);
         })
         .catch(e => {
-            console.error("Lecture impossible, même après interaction:", e);
+            // Affiche l'erreur sur l'écran du téléphone pour diagnostic
+            alert("Erreur audio (iPhone) : " + e.message);
+            console.error("Lecture impossible:", e);
         });
     goToAct(1);
 }
