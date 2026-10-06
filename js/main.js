@@ -17,21 +17,22 @@ function goToAct(actNumber) {
     }
 }
 
-function initializeAudioAndGoToAct1() {
-    // 1. Lancer l'audio
-    bgMusic.play()
-        .then(() => {
-            isPlaying = true;
-            volPath.setAttribute('d', pathOn);
-            // 2. Attendre un court instant avant de changer de page
-            setTimeout(() => {
-                goToAct(1);
-            }, 100);
-        })
-        .catch(e => {
-            alert("Erreur audio : " + e.message + ". Vérifiez le bouton silencieux physique de l'iPhone.");
-            console.error("Lecture impossible:", e);
-        });
+async function initializeAudioAndGoToAct1() {
+    // 1. Tenter la lecture immédiatement
+    try {
+        bgMusic.currentTime = 0; // Remise à zéro pour être sûr
+        await bgMusic.play();
+        
+        // 2. Si succès, mise à jour de l'icône
+        isPlaying = true;
+        volPath.setAttribute('d', pathOn);
+        
+        // 3. Changement de section
+        goToAct(1);
+    } catch (e) {
+        // En cas d'échec sur iPhone
+        alert("Erreur lecture : " + e.message);
+    }
 }
 
 
