@@ -30,23 +30,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    background: rgba(248, 240, 223, 0.6);
-    backdrop-filter: blur(5px);
-    font-size: 0.9rem;
+    background: rgba(248, 240, 223, 0.95);
+    backdrop-filter: blur(10px);
+    font-size: 0.95rem;
     color: var(--brown-dark);
     z-index: 100;
-}
-
-.logo-header {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    display: block;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .logo-card {
@@ -103,18 +94,19 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 28px 20px;
+    padding: 60px 20px 20px;
+    box-sizing: border-box;
 }
 
 .opening-card {
     width: min(680px, 100%);
     text-align: center;
-    padding: 48px 28px;
-    background: rgba(255,253,248,.78);
-    border: 1px solid rgba(216,185,138,.5);
-    border-radius: 30px;
-    box-shadow: 0 25px 70px var(--shadow);
-    backdrop-filter: blur(8px);
+    padding: 50px 30px;
+    background: rgba(255,253,248,.85);
+    border: 1px solid rgba(216,185,138,.3);
+    border-radius: 40px;
+    box-shadow: 0 20px 50px var(--shadow);
+    backdrop-filter: blur(15px);
     animation: cardIn 1.2s ease both;
 }
 
@@ -290,13 +282,15 @@ button {
 
 .story-container {
     width: min(850px, 92%);
-    margin: 40px auto;
-    padding: 40px 20px;
+    margin: 100px auto 40px;
+    padding: 20px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border: 2px solid rgba(255, 255, 255, 0.6);
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
 }
 
 /* Custom Scrollbar */
@@ -593,7 +587,6 @@ footer {
 <div class="background-blur"></div>
 
 <header class="header">
-    <img src="./background.jpeg" class="logo-header" alt="Logo">
     <div id="dateTime"></div>
 </header>
 
@@ -627,7 +620,7 @@ footer {
      ÉCRAN 3: LETTRE
 ========================= -->
 <main id="storyPage" class="story hidden">
-    <div class="story-container" style="padding-top: 100px;">
+    <div class="story-container">
         <article class="story-text">
             <p>Joyeux anniversaire, Numa.</p>
             <p>J'ai commencé ce message au moins trois fois. À chaque fois, je trouvais que ça ne sonnait pas assez comme moi, ou pas assez à la hauteur de ce que je ressens. Alors j'ai arrêté de chercher les beaux mots, et je vais simplement te parler comme je le fais quand je pense à toi. Ça arrive souvent, en fait. Tout le temps.</p>
