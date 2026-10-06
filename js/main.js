@@ -18,7 +18,8 @@ function goToAct(actNumber) {
 }
 
 function initializeAudioAndGoToAct1() {
-    // 1. Déclenchement explicite sur clic utilisateur uniquement
+    // 1. Chargement et lecture immédiate lors de l'interaction
+    bgMusic.load(); 
     bgMusic.play()
         .then(() => {
             isPlaying = true;
