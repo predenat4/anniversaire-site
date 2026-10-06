@@ -2,10 +2,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F8F0DF">
-<title>Les pages que nous écrivons</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8F0DF">
+    <title>pour ma deesse</title>
+    <link rel="icon" type="image/jpeg" href="background.jpeg">
+    <meta property="og:image" content="https://predenat4.github.io/anniversaire-site/background.jpeg">
+    <meta property="og:title" content="pour ma deesse">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://predenat4.github.io/anniversaire-site/">
+
 
 <style>
 :root {
@@ -31,6 +37,26 @@
     font-size: 0.9rem;
     color: var(--brown-dark);
     z-index: 100;
+}
+
+.logo-header {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: block;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.logo-card {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
 * {
@@ -567,6 +593,7 @@ footer {
 <div class="background-blur"></div>
 
 <header class="header">
+    <img src="./background.jpeg" class="logo-header" alt="Logo">
     <div id="dateTime"></div>
 </header>
 
@@ -575,6 +602,7 @@ footer {
 ========================= -->
 <section id="welcomeScreen" class="screen">
     <div class="opening-card">
+        <img src="./image pour le cercle.jpeg" class="logo-card" alt="Photo">
         <h1>Bonjour Numa ❤️</h1>
         <p>Veuillez mettre vos écouteurs pour une expérience optimale. 🎧</p>
         <button class="main-button" onclick="showScreen('readyScreen')">
